@@ -1,0 +1,56 @@
+@startuml
+
+
+
+class Expert <<entity>> {
+    -id : int
+    -nom : string
+    -prenom : string
+    +setDossier() : Dossier
+    +getDossier() : Dossier
+}
+
+class Vehicule <<entity>> {
+    -id : int
+    -marque : string
+    -modele : string
+    -annee : int
+}
+
+class PrestationRemiseEtat {
+    -id : int
+    -libelle : string
+    -prestationPenture : PrestationRemisePeinture[] | null
+    -PrestationPiece: PrestationRemisePiece[] | null
+
+    
+}
+
+class Photo <<entity>> {
+    -id : int
+    -nom : string
+}
+
+class Dossier <<entity>> {
+    -id : int
+    -reference : string
+}
+
+class PrestationRemisePeinture {
+    -libelle : string
+    -?description: string
+}
+
+class PrestationRemisePiece {
+    -libelle : string
+    -?description: string
+}
+
+Expert "1" -- "0..*" Dossier : crée
+Dossier "0..1" -- "1" Vehicule : concerne
+Dossier "1" -- "0..*" PrestationRemiseEtat : contient
+PrestationRemiseEtat "1" --|> "0..*" Photo : contient
+PrestationRemiseEtat ..|> PrestationRemisePeinture
+PrestationRemiseEtat ..|>PrestationRemisePiece
+
+@enduml

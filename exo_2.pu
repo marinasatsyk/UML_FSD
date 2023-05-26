@@ -1,0 +1,64 @@
+@startuml 
+
+class SocieteFinancement {
+    -code
+    -nom 
+    +SocieteFinancement()
+    +AjouterExpertisePool()
+    +AjouterExpertiseClient()
+    +LesExpertisesIndispos()
+    +NbIndisponibilites(unMotif)
+    +NbIndisponibilites()
+
+}
+
+
+class  Experise <<abstract>> {
+    -codeDossier
+    -dateHeureRDV
+    -lieuRDV
+    -adresse
+    -immatriculation
+    -marque
+    -modele
+    +Expertise()
+    +CreerIndisponibilite()
+    +EtatExpertise()
+    +GetIndisponibilite()
+}
+
+
+class Indisponibilite{
+    -clientResponsable
+    -unMotif
+    +Indiponibilite()
+    +ClientEstResponsable()
+    +GetMotif()
+    +addMotif(Motif)
+}
+
+enum Motif {
+    CLIENTABSENT: "Client absent",
+    VEHICULEINACCESSIBLE: "Véhicule inaccessible",
+    VEHICULEABSCENT: "Véhicule absent",
+    ADRESSERRONE: "Adresse erronée"
+}
+
+class Pool_Garage {
+    +Pool_Garage()
+}
+
+class RDV_Client {
+    -nomContact
+    -telephone
+    -mail
+    +RDV_Client() 
+}
+
+
+SocieteFinancement "1" *--> "*"Experise : <<les expertises>>
+Experise --> Indisponibilite 
+Indisponibilite ---> Motif
+Experise <|-- Pool_Garage
+Experise <|-- RDV_Client
+@enduml
