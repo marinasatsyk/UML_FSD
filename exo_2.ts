@@ -150,7 +150,7 @@ enum Motif {
     }
   }
   
-  // Exemple d'utilisation
+  // Exemple 
   const societeFinancement = new SocieteFinancement(123, "Ma Société de Financement");
   
   const poolGarage = new Pool_Garage(456, new Date(), "Garage ABC", "123 rue des Garages", "ABC123", "Renault");

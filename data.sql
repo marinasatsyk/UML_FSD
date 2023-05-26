@@ -41,11 +41,10 @@ CREATE TABLE IF NOT EXISTS `vehicules_expertise` (
   `heure` varchar(255) DEFAULT NULL,
   `immatriculation` varchar(255) DEFAULT NULL,
   `marque` varchar(255) DEFAULT NULL,
-  `immatriculation` varchar(255) DEFAULT NULL,
   `modele` varchar(255) DEFAULT NULL,
-  `expert_id` int(11) NOT NULL,
+  `experts_id` int(11) NOT NULL,
   PRIMARY KEY (`vehicules_expertise_id`),
-  KEY `expert_id` (`expert_id`),
+  UNIQUE KEY `compositeKey` (`experts_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 --#6
 
@@ -55,7 +54,7 @@ VALUES
   ('Smith', 'Jane'),
   ('Johnson', 'Michael');
 
-INSERT INTO vehicules_expertise (date, heure, immatriculation, marque, modele, expert_id)
+INSERT INTO vehicules_expertise (date, heure, immatriculation, marque, modele, experts_id)
 VALUES
   ('2023-05-26', '10:00:00', 'ABC123', 'Marque A', 'Modèle A', 1),
   ('2023-05-27', '14:30:00', 'DEF456', 'Marque B', 'Modèle B', 2),
@@ -64,5 +63,11 @@ VALUES
 --#7
 DELETE FROM experts
 WHERE nom = 'Doe' AND prenom = 'John';
+
+
+SELECT *, exp.nom
+FROM vehicules_expertise ve
+LEFT JOIN experts exp
+ON ve.experts_id = exp.experts_id
 
 

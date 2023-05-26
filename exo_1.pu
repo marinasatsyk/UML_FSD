@@ -34,6 +34,7 @@ class Photo <<entity>> {
 class Dossier <<entity>> {
     -id : int
     -reference : string
+    -prestationsRemiseEtat : PrestationRemiseEtat[]
 }
 
 class PrestationRemisePeinture {
@@ -50,7 +51,7 @@ Expert "1" -- "0..*" Dossier : crée
 Dossier "0..1" -- "1" Vehicule : concerne
 Dossier "1" -- "0..*" PrestationRemiseEtat : contient
 PrestationRemiseEtat "1" --|> "0..*" Photo : contient
-PrestationRemiseEtat ..|> PrestationRemisePeinture
-PrestationRemiseEtat ..|>PrestationRemisePiece
+PrestationRemiseEtat --|> PrestationRemisePeinture
+PrestationRemiseEtat --|>PrestationRemisePiece
 
 @enduml
